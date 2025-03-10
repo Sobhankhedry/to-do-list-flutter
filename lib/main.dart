@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:t2/Model/todo.dart';
+import "widgets/todo_item.dart";
 
 
 void main() {
@@ -7,6 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -38,7 +42,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key});
+
+  final toDoList = ToDo.toDoList();
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +54,70 @@ class MyHomePage extends StatelessWidget {
         title: Center(
           child: Text(
             "To Do List",
-            style: GoogleFonts.calligraffitti(fontSize: 35, fontWeight: FontWeight.bold),
+            style: GoogleFonts.calligraffitti(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
-      body: Container(),
+      body: Column(
+        children: [
+          // Search Box Row (Ensure it has proper width)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity, // Ensures it stretches properly
+              child: SearchBox(),
+            ),
+          ),
+          // ListView needs a fixed height or should be inside Expanded
+          Expanded(
+            child: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+                  child: Container(
+                    child: Text(
+                      "Things to do",
+                      style: GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.bold),
+
+                    ),
+                  ),
+                ),
+                for(ToDo todoo in toDoList)
+                  ToDoItem(todo: todoo)
+                ,
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
+Widget SearchBox(){
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white24,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: TextField(
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(CupertinoIcons.search, color: Colors.black,size: 25,),
+              ),
+              border: InputBorder.none,
+              hintText: 'search...'
+          ),
+        ),
+      ),
     );
   }
 }
