@@ -7,19 +7,22 @@ const Color tdBlue = Color(0xFF3B82F6);
 
 class ToDoItem extends StatelessWidget {
   final ToDo todo;
+  final onToDoChanged;
   // This constructor requires a title but you're not passing it when calling ToDoItem()
-  ToDoItem({Key? key, required this.todo});
+  ToDoItem({Key? key, required this.todo, required this.onToDoChanged});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          onToDoChanged(todo);
+        },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         tileColor: Colors.white,
         leading: Icon(
-          todo.isDone? Icons.check_box: Icons.square
+          todo.isDone? Icons.check_box: Icons.square_outlined
         ),
         title: Text(
           todo.Text,
