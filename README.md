@@ -10,7 +10,7 @@ A simple To-Do list application built with Flutter that allows users to manage t
 - Beautiful UI using Google Fonts
 - Simple and easy-to-use interface for managing tasks
 
-## Screenshots
+## Screenshot
 
 ![image](https://github.com/user-attachments/assets/ef47ca16-d39a-40d1-a74b-05cbf50e13dc)
 
